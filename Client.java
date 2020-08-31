@@ -3,7 +3,7 @@ import java.util.HashMap;
 public class Client {
 
     public static void main(String[] args)  {
-        Stack<Integer> stack = new StackArray<>();
+        Stack<Integer> stack = new StackArrayDynamic<>();
         stack.push(10);
         stack.isEmpty();
         stack.pop();

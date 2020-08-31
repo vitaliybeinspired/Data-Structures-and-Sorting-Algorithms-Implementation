@@ -16,26 +16,35 @@ import java.util.*;
  *         // if it makes since. others will try to use this method expecting return value.
  *
  *         explain to interviewer how void pop is better than T pop?
+ *
+ *   LinkedList implementation no blocking? why would i want to block?
+ *
+ *   StackLinkedList for capacity unlimited.
+ *   I need to track size
+ *
+ *   Reason why node is not a class by itself is because a class can't be a data holder
+ *   a class is a data holder AND behaviors as methods
  */
 
 public class StackLinkedList<T> implements Stack<T> {
+    private static class Node<T> {
+        T data;
+        Node<T> next;
 
-    private static class Node<U> {
-        U data;
-        Node<U> next;
-
-        private Node(U data) {
+        private Node(T data) {
             this.data = data;
         }
     }
 
     private Node<T> top;
+    private int size = 0;
 
     // this is stack, head should be top, not at start/bottom
     public void push(T data) {
         Node<T> newNode = new Node<>(data);
         newNode.next = top;
         top = newNode;
+        size++;
     }
 
     public void pop() {
@@ -50,6 +59,10 @@ public class StackLinkedList<T> implements Stack<T> {
 
     public boolean isEmpty() {
         return top == null;
+    }
+
+    public int size() {
+        return size;
     }
 }
 

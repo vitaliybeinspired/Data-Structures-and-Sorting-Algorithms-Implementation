@@ -1,4 +1,17 @@
 /**
+ *  Blocking vs Static naming. Interviewer needs to know concept but if I name it differently...
+ *
+ *  throwing exceptions is required for edge cases, can't ignore it.
+ *
+ *  Stack array for capacity limit.
+ */
+
+
+
+
+
+
+/**
  * Quick interview refresher.
  *
  * Visualize. Formulas. Design Choice. Pro knowledge.
@@ -39,6 +52,8 @@
  *  if limit, i need isFull()
  *  in limitless, i need resize()
  *
+ *  WAIT IF LIMITLESS SIZE THEN USE LINKEDLIST???
+ *
  *  pro knowledge interview: ask interviewer which one and explain trade offs.
  *
  *  can i combine both using boolean? 2 constructors, defaul dynamic, parameter limit
@@ -50,43 +65,37 @@
  *
  *  this is going off track, i'll get demotivated if i don't finish implementing
  *
+ * why blocking not static?
+ *
+ * IF USER KNOWS SIZE WHY NOT ARRAY BLOCKING?
+ * IF USER DOESN'T KNOW SIZE WHY NOT LINKEDLISTS?
+ *
+ * WHY DO I EVEN HAVE BLOCKING ARRAY?
+ *
+ * THESE ARE DESIGN CHOICE TRADE OFF QUESTIONS.
+ *
+ * dynamic array seems really inefficent. resizing is not good.
+ *
  */
+
 
 import java.util.EmptyStackException; // i would need to remember to write this in docs or online code
 
 public class StackArray<T> implements Stack<T> {
     int top;
-    int max;
+    int capacity;
     T[] stack;
 
-    public StackArray() {
-        stack = (T[]) new Object[15];
-        max = 10;
+    public StackArray(int capacity) {
+        stack = (T[]) new Object[capacity];
+        this.capacity = capacity;
         top = 0;
     }
 
-    public StackArray(int max) {
-        super(); // everything in default gets excuted then goes bellow???
-        this.max = max;
-    }
-
     public void push(T data) {
-        if (isFull()) {
-            resize();
-        }
+        if (isFull()) throw new ArrayIndexOutOfBoundsException("Stack Full.");
         stack[top++] = data;
     }
-
-    // or make a size in constructor?
-    // either fixed size at constructer with full method or dynamic resize with no full limit
-    private void resize() { // resize is optional during interview or quickly do it?
-        T[] temp = (T[]) new Object[max << 1];
-        for (int i = 0; i < stack.length; i++) {
-            temp[i] = stack[i];
-        }
-        stack = temp;
-    }
-
 
     public void pop() {
         if (isEmpty()) throw new EmptyStackException();
@@ -103,7 +112,7 @@ public class StackArray<T> implements Stack<T> {
     }
 
     public boolean isFull() {
-        return top == max;
+        return top == capacity;
     }
 
 }
