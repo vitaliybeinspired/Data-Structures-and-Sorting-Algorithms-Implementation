@@ -9,6 +9,9 @@
  *
  * if i didn't know this simple implementation from CtCI, I would have done next and prev! so how do i know
  *  * I made array stack good?
+ *
+ *
+ *  users can call stack.length built in to check size??? or that won't give amount of elements...
  */
 
 import java.util.EmptyStackException; // i would need to remember to write this in docs or online code

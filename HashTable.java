@@ -1,10 +1,9 @@
-public interface HashTable<T> {
-    void put(T key, T value);
-    T getKey(T key);
-    T getValue(T value);
-    boolean containsKey(T key);
-    boolean containsValue(T value);
-
+public interface HashTable<K, V> {
+    void put(K key, V value);
+    K getKey(K key);
+    V getValue(V value);
+    boolean containsKey(K key);
+    boolean containsValue(V value);
 }
 
 
