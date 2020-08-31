@@ -17,7 +17,7 @@ public class HashTableArrayLinearProbing<K, V> implements HashTable<K, V> {
     // or array[][] thats 2 columsn, many rows? never seen 2d array
 
 
-    Object[] hashTable = new Object[10];
+    Object[] hashTable = new Object[15];
 
 
     public void put(K key, V value) {
