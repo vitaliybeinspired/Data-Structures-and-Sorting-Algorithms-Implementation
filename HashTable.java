@@ -1,9 +1,17 @@
-public interface HashTable<K, V> {
-    void put(K key, V value);
-    K getKey(K key);
-    V getValue(V value);
-    boolean containsKey(K key);
-    boolean containsValue(V value);
+/**
+ * When using a Hashtable, you specify an object that is used as a key, and the value that you want
+ * linked to that key. The key is then hashed, and the resulting hash code is used as the index at
+ * which the value is stored within the table.
+
+ */
+
+public interface HashTable<Key, Value> {
+    void put(Key key, Value value);
+    Value getValue(Key value);
+    boolean containsKey(Key key);
+    void delete(Key key);
+    int size();
+    boolean isEmpty();
 }
 
 

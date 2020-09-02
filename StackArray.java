@@ -93,7 +93,7 @@ public class StackArray<T> implements Stack<T> {
     }
 
     public void push(T data) {
-        if (isFull()) throw new ArrayIndexOutOfBoundsException("Stack Full.");
+        if (isFull()) throw new ArrayIndexOutOfBoundsException();
         stack[top++] = data;
     }
 

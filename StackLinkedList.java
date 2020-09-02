@@ -48,12 +48,12 @@ public class StackLinkedList<T> implements Stack<T> {
     }
 
     public void pop() {
-        if (isEmpty()) throw new EmptyStackException();
+        if (isEmpty()) throw new NullPointerException();
         top = top.next;
     }
 
     public T peek() {
-        if (isEmpty()) throw new EmptyStackException();
+        if (isEmpty()) throw new NullPointerException();
         return top.data;
     }
 
