@@ -78,23 +78,28 @@
  *
  */
 
+/**
+ *
+ * was i doing all these generics wrong? is it T in c++ but Object in java?
+ * do i replace all T with object? no cuz arraylist had E but E is for element not object!!!!
+ */
 
 import java.util.EmptyStackException; // i would need to remember to write this in docs or online code
 
-public class StackArray<T> implements Stack<T> {
-    int top;
-    int capacity;
-    T[] stack;
+public class StackArray<E> implements Stack<E> {
+    private int top;
+    private final int capacity;
+    private final E[] stack;
 
     public StackArray(int capacity) {
-        stack = (T[]) new Object[capacity];
+        stack = (E[]) new Object[capacity];
         this.capacity = capacity;
         top = 0;
     }
 
-    public void push(T data) {
+    public void push(E element) {
         if (isFull()) throw new ArrayIndexOutOfBoundsException();
-        stack[top++] = data;
+        stack[top++] = element;
     }
 
     public void pop() {
@@ -102,7 +107,7 @@ public class StackArray<T> implements Stack<T> {
         top--;
     }
 
-    public T peek() {
+    public E peek() {
         if (isEmpty()) throw new EmptyStackException();
         return stack[top - 1];
     }

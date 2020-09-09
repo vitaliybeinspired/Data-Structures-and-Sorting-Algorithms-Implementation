@@ -6,5 +6,4 @@ public interface Queue<T> {
     boolean isEmpty();
     T getFront();
     T getBack();
-
 }

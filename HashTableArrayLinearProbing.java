@@ -110,6 +110,7 @@ public class HashTableArrayLinearProbing<Key, Value> implements HashTable<Key, V
     // hash function for keys - returns value between 0 and capacity - 1
     private int hashCode(Key key) {
         return (key.hashCode() & 0x7fffffff) % capacity; // // returns the integer hash code value of the object. the and operator masking is to prevent -2^31 negative number bug
+        // doesn't java have the mask implemented so it won't return bug?
     }
 
     public boolean containsKey(Key key) {

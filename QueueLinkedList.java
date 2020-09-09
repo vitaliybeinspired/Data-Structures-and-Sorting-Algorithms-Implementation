@@ -7,59 +7,36 @@ import java.util.NoSuchElementException;
  *
  *  Visualize front pointer on the left and back pointer on the right. Enqueue by ADDING node to the back.
  *  Dequeue by MOVING front pointer to the right.
+ *
+ *  what is the point of this queue? it's just a linkedlist
+ *  cuz this doesn't allow removing/adding to middle
+ *  just uses some linkedlist methods
  */
 
 public class QueueLinkedList<T> implements Queue<T> {
-
-    private static class Node<T> {
-        private T data;
-        private Node<T> next;
-
-        public Node(T data) {
-            this.data = data;
-        }
-    }
-
-    private Node<T> front, back;
-    private int size = 0;
-
+    LinkedList<T> queue = new LinkedList<>();
 
     public void enqueue(T item) {
-        Node<T> newNode = new Node<>(item);
-        if (back != null) {
-            back.next = newNode;
-        }
-        back = newNode;
-        if (front == null) { // for first node
-            front = back;
-        }
-        size++;
+        queue.insert(item);
     }
    
     public void dequeue() {
-        if (front == null) throw new NullPointerException();
-        front = front.next;
-        if (front == null) { // for last node
-            back = null;
-        }
-        size--;
+        queue.delete();
     }
 
     public T getFront() {
-        if (front == null) throw new NullPointerException();
-        return front.data;
+        return queue.getFirst();
     }
 
     public T getBack() {
-        if (back == null) throw new NullPointerException();
-        return back.data;
+        return queue.getLast();
     }
 
     public boolean isEmpty() {
-        return front == null;
+        return queue.isEmpty();
     }
 
     public int size() {
-        return size;
+        return queue.getSize();
     }
 }

@@ -1,6 +1,6 @@
 /**
  *
- * @param <T> genertic
+ * @param <E> genertic
  *
  *  core operations on a stack that can be implementd using array or linkedlist using FIFO
  *
@@ -8,9 +8,9 @@
  *           or does size not matter?
  */
 
-public interface Stack<T> {
-    void push(T item);
+public interface Stack<E> {
+    void push(E element);
     void pop();
-    T peek();
+    E peek();
     boolean isEmpty();
 }
