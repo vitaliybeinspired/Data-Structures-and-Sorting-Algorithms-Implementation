@@ -1,3 +1,6 @@
+package DataStructures;
+
+
 /**
  *  Blocking vs Static naming. Interviewer needs to know concept but if I name it differently...
  *
@@ -86,12 +89,12 @@
 
 import java.util.EmptyStackException; // i would need to remember to write this in docs or online code
 
-public class StackArray<E> implements Stack<E> {
+public class MyStackArray<E> implements MyStack<E> {
     private int top;
     private final int capacity;
     private final E[] stack;
 
-    public StackArray(int capacity) {
+    public MyStackArray(int capacity) {
         stack = (E[]) new Object[capacity];
         this.capacity = capacity;
         top = 0;
@@ -102,9 +105,9 @@ public class StackArray<E> implements Stack<E> {
         stack[top++] = element;
     }
 
-    public void pop() {
+    public E pop() {
         if (isEmpty()) throw new EmptyStackException();
-        top--;
+        return stack[--top];
     }
 
     public E peek() {

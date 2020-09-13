@@ -1,4 +1,4 @@
-import java.util.*;
+package DataStructures;
 
 /**
  * Quick Interview refresher
@@ -26,7 +26,7 @@ import java.util.*;
  *   a class is a data holder AND behaviors as methods
  */
 
-public class StackLinkedList<T> implements Stack<T> {
+public class MyStackLinkedList<T> implements MyStack<T> {
     private static class Node<T> {
         T data;
         Node<T> next;
@@ -47,9 +47,11 @@ public class StackLinkedList<T> implements Stack<T> {
         size++;
     }
 
-    public void pop() {
+    public T pop() {
         if (isEmpty()) throw new NullPointerException();
+        T temp = top.data;
         top = top.next;
+        return temp;
     }
 
     public T peek() {

@@ -1,3 +1,6 @@
+package DataStructures;
+
+
 /**
  * so thats how it works, if i try to put a key, value at index 2 and it's taken, i have to place it below!
  *
@@ -71,17 +74,17 @@
  // PRIME IS REQUIRED LIKE RESIZING. i learn a lot about primes so use knowledge to show interviewers
  */
 
-public class HashTableArrayLinearProbing<Key, Value> implements HashTable<Key, Value> {
+public class MyArrayHashtable<Key, Value> implements MyHashtable<Key, Value> {
     private int size;
     private int capacity;
     private Key[] keys;
     private Value[] values;
 
-    public HashTableArrayLinearProbing() {
-        this(16);
+    public MyArrayHashtable() {
+        this(10);
     }
 
-    public HashTableArrayLinearProbing(int capacity) {
+    public MyArrayHashtable(int capacity) {
         this.capacity = capacity;
         size = 0;
         keys = (Key[]) new Object[capacity];
@@ -90,14 +93,12 @@ public class HashTableArrayLinearProbing<Key, Value> implements HashTable<Key, V
 
     public void put(Key key, Value value) {
         if (key == null || value == null) throw new IllegalArgumentException();
-
         if (size >= capacity / 2) {
-            resize(2 * capacity); // resizing is mandatoring in hashtable
+            resize(2 * capacity);
         }
-
         int probe;
         for (probe = hashCode(key); keys[probe] != null; probe = (probe + 1) % capacity) { // start at index of hashkey, stop until no collisions at null, linear probing +1 and loop around with mod capacity
-            if (keys[probe].equals(key)) { // isn't this
+            if (keys[probe].equals(key)) { // replace same key with new value
                 values[probe] = value;
                 return;
             }
@@ -107,16 +108,16 @@ public class HashTableArrayLinearProbing<Key, Value> implements HashTable<Key, V
         size++;
     }
 
-    // hash function for keys - returns value between 0 and capacity - 1
     private int hashCode(Key key) {
-        return (key.hashCode() & 0x7fffffff) % capacity; // // returns the integer hash code value of the object. the and operator masking is to prevent -2^31 negative number bug
-        // doesn't java have the mask implemented so it won't return bug?
+        return (key.hashCode() & 0x7fffffff) % capacity; // returns the integer hash code value of the object. the and operator masking is to prevent -2^31 negative number bug doesn't java have the mask implemented so it won't return bug?
+
     }
 
     public boolean containsKey(Key key) {
         return getValue(key) != null;
     }
 
+    // linear probing, just add 2 instead of 1 for double probing, or + 4 for quad or other
     public Value getValue(Key key) {
         if (key == null) throw new IllegalArgumentException();
         for (int probe = hashCode(key); keys[probe] != null; probe = (probe + 1) % capacity) {
@@ -139,7 +140,7 @@ public class HashTableArrayLinearProbing<Key, Value> implements HashTable<Key, V
 
         // delete key and associated value
         keys[probe] = null;
-        values[probe] = null;
+        values[probe] = null; // not nesessary? waste of instruction runtime
         size--;
 
         // halves size of array if it's 12.5% full or less
@@ -155,8 +156,15 @@ public class HashTableArrayLinearProbing<Key, Value> implements HashTable<Key, V
         return size == 0;
     }
 
-    // smart to do resize with parameter cuz then i can upsize it or downsize it
     private void resize(int capacity) {
-        this.capacity = capacity;
+        MyArrayHashtable<Key, Value> temp = new MyArrayHashtable<>(capacity);
+        for (int i = 0; i < this.capacity; i++) {
+            if (keys[i] != null) {
+                temp.put(keys[i], values[i]);
+            }
+        }
+        keys = temp.keys;
+        values = temp.values;
+        this.capacity = temp.capacity;
     }
 }

@@ -1,25 +1,43 @@
-public class LinkedList<E> {
+/***
+ *  queue linkedlist
+ *  VISUALIZE. BELIEVE IMPLEMENTATION. QUICK ACCURACY. MY CODE.
 
-    private static class Node<E> {
-        private E data;
-        private Node<E> next;
+ *  This is unlimited capacity queue using nodes that tracks size.
+ *
+ *  Visualize front pointer on the left and back pointer on the right. Enqueue by ADDING node to the back.
+ *  Dequeue by MOVING front pointer to the right.
+ *
+ *  what is the point of this queue? it's just a linkedlist
+ *  cuz this doesn't allow removing/adding to middle
+ *  just uses some linkedlist methods
+ */
 
-        public Node(E data) {
+package DataStructures;
+
+
+public class MyLinkedList<T> implements MyQueue<T> {
+
+    private static class Node<T> {
+        private T data;
+        private Node<T> next;
+
+        public Node(T data) {
             this.data = data;
             next = null;
         }
     }
 
-    private Node<E> head = null;
+    private Node<T> head = null;
     private int size = 0;
 
     // insert last
-    public void insert(E element) {
-        Node<E> newNode = new Node<>(element);
+    public void add(T element) {
+        if (element == null) throw new NullPointerException();
+        Node<T> newNode = new Node<>(element);
         if (isEmpty()) {
             head = newNode;
         } else {
-            Node<E> temp = head;
+            Node<T> temp = head;
             while (temp.next != null) {
                 temp = temp.next;
             }
@@ -28,20 +46,20 @@ public class LinkedList<E> {
         size++;
     }
 
-    public void insertAt(E element, int index) {
+    public void insertAt(T element, int index) {
         if (index > size || index < 0) {
             throw new IndexOutOfBoundsException();
         }
-        Node<E> newNode = new Node<>(element);
+        Node<T> newNode = new Node<>(element);
         if (index == size) {
-            insert(element);
+            add(element);
         } else if (isEmpty()) {
             head = newNode;
         } else if (index == 0) {
             newNode.next = head;
             head = newNode;
         } else {
-            Node<E> temp = head;
+            Node<T> temp = head;
             for (int i = 0; i < index - 1; i++) {
                 temp = temp.next;
             }
@@ -55,8 +73,8 @@ public class LinkedList<E> {
         return head == null;
     }
 
-    public boolean search(E element) {
-        Node<E> temp = head;
+    public boolean search(T element) {
+        Node<T> temp = head;
         while (temp.next != null) {
             if (temp.data == element) {
                 return true;
@@ -65,26 +83,26 @@ public class LinkedList<E> {
         return false;
     }
 
-    public E getFirst() {
+    public T peek() {
         if (isEmpty()) {
             throw new NullPointerException();
         }
         return head.data;
     }
 
-    public E getLast() {
-        Node<E> temp = head;
+    public T getLast() {
+        Node<T> temp = head;
         while (temp.next != null) {
             temp = temp.next;
         }
         return temp.data;
     }
 
-    public E getAt(int index) {
+    public T getAt(int index) {
         if (index > size || index < 0) {
             throw new IndexOutOfBoundsException();
         }
-        Node<E> temp = head;
+        Node<T> temp = head;
         for (int i = 0; i < index; i++) {
             temp = temp.next;
         }
@@ -92,18 +110,19 @@ public class LinkedList<E> {
     }
 
 
-    public void delete() {
+    public T remove() {
         if (isEmpty()) throw new NullPointerException();
         if (size == 1) {
             head = null;
         } else {
-            Node<E> temp = head;
+            Node<T> temp = head;
             while (temp.next.next != null) {
                 temp = temp.next;
             }
             temp.next = null;
         }
         size--;
+        return null; // FIX LATER
     }
 
     public void deleteAt(int index) {
@@ -111,9 +130,9 @@ public class LinkedList<E> {
             throw new IndexOutOfBoundsException();
         }
         if (index == 0 || index == size) {
-            delete();
+            remove();
         } else {
-            Node<E> temp = head;
+            Node<T> temp = head;
             for (int i = 0; i < index; i++) {
                 temp = temp.next;
             }
@@ -122,7 +141,7 @@ public class LinkedList<E> {
         }
     }
 
-    public int getSize() {
+    public int size() {
         return size;
     }
 

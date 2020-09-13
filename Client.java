@@ -1,10 +1,3 @@
-import com.sun.source.tree.BinaryTree;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Stack;
-import java.util.TreeSet;
-
 /**
  *
  * Data Structures to implement:
@@ -18,18 +11,46 @@ import java.util.TreeSet;
  *
  *
  */
+
 public class Client {
 
-    public static void main(String[] args)  {
-        ArrayList<Integer> a = new ArrayList<>();
-        a.add(5);
+    public static class TreeNode {
+        int val;
+        Solution.TreeNode left;
+        Solution.TreeNode right;
 
-        LinkedList<Integer> list = new LinkedList<>();
-        list.add(1);
+        TreeNode() {
+
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, Solution.TreeNode left, Solution.TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    public static void main(String[] args) {
+//        MyHashtable<String, Integer> ht = new MyArrayLinearProbingHashtable<>();
+//        ht.put("hi", 2);
+//        ht.put("bye", 3);
+//        ht.put("again", 4);
+//        ht.put("yoyo", 18);
+//        ht.put("ih", 2);
+//        ht.put("yeb", 3);
+
+        String ab = "ab";
+        int a = ab.hashCode();
+
+        String ba = "ba";
+        int b = ba.hashCode();
 
 
 
-        TreeSet<Integer> t = new TreeSet<>();
-        t.add(2);
+
     }
 }

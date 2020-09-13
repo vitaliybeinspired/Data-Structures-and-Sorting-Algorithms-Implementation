@@ -1,4 +1,6 @@
-public class Tree<T> {
+package DataStructures;
+
+public class MyTree<T> {
 
     private static class Node<T> {
         public T data;

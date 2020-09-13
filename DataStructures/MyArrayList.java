@@ -1,3 +1,5 @@
+package DataStructures;
+
 import java.util.NoSuchElementException;
 
 /**
@@ -9,47 +11,38 @@ import java.util.NoSuchElementException;
  *for (int i = index; i < size - index - 1; i++) { // better than i < list.length! explain in interview
  * because don't need to move empty element all the way on the right
  *
- * size word is ambiguous, can mean capacity? or is it just me. when i was learning it was confusing.
- *
- * even though i like elements instead of size, the real arraylist uses size so i need to get used to it
- * but this is my own, how i understand it. but then i will have to think and might get confused
- * when i use the real one. so i have to follow convention to understand cuz then i will know concepts
- * but not when people use a different name for it
- *
- * when people call size() they want number of elements not lenght/capacity of arraylist
- * so what about capcity? should it be length? both good
- * length makes sense cuz thats what method names are in java
- *
- * E for element offical but does it make senese to me? E is for Integer, String objects
- * those are elements? or types? or objects
- * wait can't do primitive types with generics
- * is it good i'm learning this way?
- *
  * Theres a reason why java uses T and E sometimes
  *
- * // i'm trying too hard, wasting time. It's all convention, make E or T go with E like java
- * element makes sense cuz element can be any type.
- * but this is called generic... element is generic
- *
- * client will be able to use comparision operators right? cuz client will declare element type
- *
- * all examples i see online who primitive especially int
- * in interview or leetcode, what will they show?
- * like hackerrank will give questions and i will have to do ints
- * might forget if i work with generics all the time.
- * what is the trade off of generics? why do i ALWAYS need them? i don't, objects expensive
  *
  * i will have muscle quick memory which every way i choose so choose wisely don't try to be too clever
  * or it will backfire.
  *
- * but it's weird to create arraylist of type ints what about String thats object can be E
+ * E for array, T for nodes
+ *
+ * innstance Variables (Non-Static Fields) Technically speaking, objects store their individual
+ * states in "non-static fields", that is, fields declared without the static keyword.
+ * Non-static fields are also known as instance variables because their values are unique
+ * to each instance of a class (to each object, in other words); the currentSpeed of one bicycle
+ * is independent from the currentSpeed of another.
+ *
+ * Class Variables (Static Fields) A class variable is any field declared with the static modifier;
+ * this tells the compiler that there is exactly one copy of this variable in existence,
+ * regardless of how many times the class has been instantiated. A field defining the number
+ * of gears for a particular kind of bicycle could be marked as static since conceptually the
+ * same number of gears will apply to all instances. The code static int numGears = 6;
+ * would create such a static field. Additionally, the keyword final could be added to
+ * indicate that the number of gears will never change.
  */
-public class ArrayList<E> {
-    private E[] arrayList;
+
+public class MyArrayList<E> {
+    // finals are in all caps?
+    // private static final int SIZE = 2;
+
+    private E[] arrayList; // this should be all caps??
     private int size;
     private int capacity;
 
-    public ArrayList() {
+    public MyArrayList() {
         arrayList = (E[]) new Object[10]; // prove how much space generic type takes before initlizing
         size = 0;
         capacity = 10;
@@ -65,6 +58,9 @@ public class ArrayList<E> {
     public void add(E element, int index) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException();
+        }
+        if (size == capacity) {
+            resize(capacity *= 2);
         }
         for (int i = size; i >= index; i--) {
             arrayList[i + 1] = arrayList[i];
@@ -93,7 +89,6 @@ public class ArrayList<E> {
         size--; // just move size pointer
     }
 
-    // must shift all right of index to left
     public void deleteAt(int index) {
         if (index < 0 || index > size) throw new IndexOutOfBoundsException();
 

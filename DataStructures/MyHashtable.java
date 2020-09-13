@@ -1,3 +1,6 @@
+package DataStructures;
+
+
 /**
  * When using a Hashtable, you specify an object that is used as a key, and the value that you want
  * linked to that key. The key is then hashed, and the resulting hash code is used as the index at
@@ -5,7 +8,7 @@
 
  */
 
-public interface HashTable<Key, Value> {
+public interface MyHashtable<Key, Value> {
     void put(Key key, Value value);
     Value getValue(Key value);
     boolean containsKey(Key key);

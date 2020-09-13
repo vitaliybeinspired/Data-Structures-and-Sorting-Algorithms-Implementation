@@ -1,3 +1,6 @@
+package DataStructures;
+
+
 /**
  * pro knowledge interview: explain how this implementation doesn't shift elements but
  * moves front and rear pointers
@@ -10,38 +13,40 @@
 
 import java.util.*;
 
-public class QueueBlockingArray<T> implements Queue<T> {
-    private final T[] queue;
+public class MyArrayBlockingQueue<E> implements MyQueue<E> {
+    private final E[] queue;
     private int front, back, count;
     private final int capacity;
 
-    public QueueBlockingArray(int capacity) {
+    public MyArrayBlockingQueue(int capacity) {
         this.capacity = capacity;
-        queue = (T[]) new Object[capacity];
+        queue = (E[]) new Object[capacity];
         front = 0;
         back = capacity - 1;
         back = 0;
         count = 0;
     }
 
-    public void enqueue(T item) {
+    public void add(E item) {
         if (isFull()) throw new IndexOutOfBoundsException();
         back = (back + 1) % capacity;
         queue[back] = item;
         count++;
     }
 
-    public void dequeue() {
+    public E remove() {
         if (isEmpty()) throw new NoSuchElementException();
+        E temp = queue[front];
         front = (front + 1) % capacity;
         count--;
+        return temp;
     }
 
-    public T getFront() {
+    public E peek() {
         return queue[front];
     }
 
-    public T getBack() {
+    public E getBack() {
         return queue[back];
     }
 

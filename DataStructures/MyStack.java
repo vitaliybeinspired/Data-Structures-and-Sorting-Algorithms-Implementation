@@ -1,3 +1,6 @@
+package DataStructures;
+
+
 /**
  *
  * @param <E> genertic
@@ -6,11 +9,15 @@
  *
  *           wouldn't a user want to know size of stack? how is that not core?
  *           or does size not matter?
+ *
+ *           i have to follow convention
+ *           it might be an exception to the rule just here so be flexible
+ *
  */
 
-public interface Stack<E> {
+public interface MyStack<E> {
     void push(E element);
-    void pop();
+    E pop();
     E peek();
     boolean isEmpty();
 }
