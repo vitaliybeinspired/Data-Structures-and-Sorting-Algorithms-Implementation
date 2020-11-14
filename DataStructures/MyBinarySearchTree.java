@@ -4,6 +4,8 @@ package DataStructures;
 import java.util.Comparator;
 
 /**
+ * BinaryTree is a data structure which is also used as BinarySearchTree
+ *
  * why am i doing it the hard way? but i need to know how to compare objects
  *
  * this isn't interview preparing. this is learning extra
@@ -22,53 +24,83 @@ import java.util.Comparator;
  *
  * then T element isn't correct
  * T data or T item or T type convention is?
- */
+ *
+ * so wrapper classes like Integer and String are final, immutable
+ *  * so passing to parameters doesn't affect outside of parameter
+ *  * so is Node immutable, final? i didn't make it or it's static? or private?
+ *
+ *  /**
+ *      * this was embarassing, confused with c++, also still vague when it makes a copy in parameter
+ *      *
+ *      *
+ *
+ *
+ *      maybe too hard on myself, look at how many AND at what depth I implemented data structures
+ *      in a week and first time in java and not understanding in c++
+ *
+ *      still so much more to do, searching and sorting algorithms
+ *      and revisiting and timing god dam
+ *
+ *
+ *      */
 
-// generic element type E extends Comprable NOT implmentes comparable???!?!
-    // i was stuck for days on this???????
-    // did the professor fuck me up?
-    // didn't she say implements comprable or was that implements comprator?!?!
-// so why do i need comprator?
-    // extends
 
 public class MyBinarySearchTree<T extends Comparable<T>> {
 
     private static class Node<T> {
-        T data; // if int i would say int data, but E element?
+        T data;
         Node<T> left;
         Node<T> right;
 
         public Node(T data) {
             this.data = data;
-            left = null;
-            right = null;
         }
     }
 
     Node<T> root;
 
-    public MyBinarySearchTree() {
-        root = null;
-    }
-
     public void insert(T data) {
-        insert(data, root);
+        root = insert(data, root);
     }
 
-    public void insert(T data, Node<T> root) {
-        Node<T> newNode = new Node<>(data);
 
-        if (data.compareTo(newNode.data) < 0) { // it's smaller left side
-            insert(data, root.left);
-        } else if (data.compareTo(newNode.data) > 0) {
-            insert(data, root.right);
+    private Node<T> insert(T data, Node<T> root) {
+        if (root == null) { // if i insert same it will insert here
+            return new Node<>(data);
+        } else if (root.data.compareTo(data) > 0) { // root.data is 4 data is 1. 4 - 1 > 0 so root.data is bigger, put data left
+            root.left = insert(data, root.left);
+        } else if (root.data.compareTo(data) < 0) { // root.data - data < 0 then root.data is smaller so go right with data
+            root.right = insert(data, root.right);
         }
-        // so how do i insert this node to this tree???
-        // how is it connected???
-        // no duplicates
+        return root;
     }
 
+    public boolean contains(T data) {
+        return contains(data, root);
+    }
 
+    private boolean contains(T data, Node<T> root) {
+        if (root == null) {
+            return false;
+        } else if (root.data.compareTo(data) == 0) {
+            return true;
+        } else if (root.data.compareTo(data) > 0) {
+            return contains(data, root.left);
+        } else {
+            return contains(data, root.right);
+        }
+    }
+
+    public void delete(T data) {
+        if (!contains(data)) return;
+
+        // find it
+        // change connections
+        // if leaf, just go to parent and set child to null
+        // if on top
+        // if in middle
+        // wow is this worth it?
+    }
 }
 
 

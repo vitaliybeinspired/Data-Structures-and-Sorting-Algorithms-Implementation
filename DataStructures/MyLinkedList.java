@@ -122,7 +122,8 @@ public class MyLinkedList<T> implements MyQueue<T> {
             temp.next = null;
         }
         size--;
-        return null; // FIX LATER
+        return null;
+        // TODO return and remove
     }
 
     public void deleteAt(int index) {

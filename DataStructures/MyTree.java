@@ -1,24 +1,25 @@
+/**
+ * this way is interesting, doesn't use arraylist
+ */
+
 package DataStructures;
 
 public class MyTree<T> {
 
     private static class Node<T> {
-        public T data;
-        public Node<T>[] children;
-
-        public Node(T data) {
-            this.data = data;
-            children = (Node<T>[]) new Object[10]; // resize if full
-            // why create array? why not nodes?
-            // how will i traverse further down? array inside array inside array???
-        }
-
+        public T name;
+        Node<T> firstChild; // null of no kids goes down
+        Node<T> nextSibling; // sideways
     }
 
     public Node<T> root;
 
-    public void add(T item) {
-
+    // the this thing might be preventing the traverse cuz it will get parent and set it.
+    // addChild of what parent, thats why i need to use this?
+    public void addChild(T name, T parentOf) {
+        Node<T> child = new Node<>();
+        child.name = name;
+        // traverse tree looking for parent then addChild
     }
 
 

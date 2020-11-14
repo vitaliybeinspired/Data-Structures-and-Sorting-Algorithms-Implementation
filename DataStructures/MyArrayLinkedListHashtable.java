@@ -30,13 +30,13 @@ package DataStructures;
  *         // h = 31 * h + is familiar forumla
  *         // i have to be able to get hashCode by hand on whiteboard
  *         // which would require gett ASCII values of characters
+ *          // this is what is stored inside a LinkedList node which has a next pointer
+ *     // i could just make a linkedlist with this kind of node and add next pointer
+ *     // storing objects inside objects is costly.
  */
 
 public class MyArrayLinkedListHashtable<Key, Value> implements MyHashtable<Key, Value> {
 
-    // this is what is stored inside a LinkedList node which has a next pointer
-    // i could just make a linkedlist with this kind of node and add next pointer
-    // storing objects inside objects is costly.
     private static class Node<Key, Value> {
         Key key;
         Value value;
@@ -62,8 +62,7 @@ public class MyArrayLinkedListHashtable<Key, Value> implements MyHashtable<Key, 
         if (keyValuePairs >= capacity * 10) { // it will always be max 10 average in all linkedlists! keyValuePairs / capacity * 10 will always = 10
             resize(2 * capacity);
         }
-        Node<Key, Value> newNode = new Node<>(key, value);
-        hashtable[hashCode(key)].add(newNode);
+        hashtable[hashCode(key)].add(new Node<>(key, value));
         keyValuePairs++;
     }
 
@@ -71,22 +70,23 @@ public class MyArrayLinkedListHashtable<Key, Value> implements MyHashtable<Key, 
         return (key.hashCode() & 0x7fffffff) % capacity; // // returns the integer hash code value of the object. the and operator masking is to prevent -2^31 negative number bug
     }
 
-    public Key getKey(Key key) {
+    public Value getValue(Key key) {
+
+        hashtable[hashCode(key)].search(key);
+
         return null;
     }
-    public Value getValue(Key value) {
-        return null;
-    }
+
     public boolean containsKey(Key key) {
         return true;
     }
 
-    public void delete(Key key) {
+    public void remove(Key key) {
 
     }
 
     public int size() {
-        return 0;
+        return keyValuePairs;
     }
 
     private void resize(int capacity) {
@@ -94,6 +94,6 @@ public class MyArrayLinkedListHashtable<Key, Value> implements MyHashtable<Key, 
     }
 
     public boolean isEmpty() {
-        return true;
+        return keyValuePairs == 0;
     }
 }

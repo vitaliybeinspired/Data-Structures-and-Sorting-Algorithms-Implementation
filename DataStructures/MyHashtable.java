@@ -10,9 +10,9 @@ package DataStructures;
 
 public interface MyHashtable<Key, Value> {
     void put(Key key, Value value);
-    Value getValue(Key value);
+    Value getValue(Key key);
     boolean containsKey(Key key);
-    void delete(Key key);
+    void remove(Key key);
     int size();
     boolean isEmpty();
 }

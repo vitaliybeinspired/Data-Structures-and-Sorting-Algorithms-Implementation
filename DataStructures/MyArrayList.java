@@ -1,5 +1,6 @@
 package DataStructures;
 
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 /**
@@ -78,9 +79,7 @@ public class MyArrayList<E> {
 
     private void resize(int capacity) {
         E[] temp = (E[]) new Object[capacity];
-        for (int i = 0; i < arrayList.length; i++) {
-            temp[i] = arrayList[i];
-        }
+        System.arraycopy(temp, 0, arrayList, 0, arrayList.length);
         arrayList = temp;
     }
 

@@ -18,6 +18,7 @@ package DataStructures;
  *      *     int hash = 0;
  *      *     for (int i = 0; i < string.length(); i++) {
  *      *         hash += 31 * hash + string.charAt(i);
+ //               hash = hash + 31* hash + string.charAt(i);
  *      *
  *      *     }
  *      *
@@ -125,12 +126,12 @@ public class MyArrayHashtable<Key, Value> implements MyHashtable<Key, Value> {
                 return values[probe];
             }
         }
-        return null;
+        return null; // return null?
     }
 
-    public void delete(Key key) {
+    public void remove(Key key) {
         if (key == null) throw new IllegalArgumentException();
-        if (!containsKey(key)) return; // why check if key exists?
+        if (!containsKey(key)) return; // why check if key exists? because while loop will never end
 
         // find position i of key
         int probe = hashCode(key);
