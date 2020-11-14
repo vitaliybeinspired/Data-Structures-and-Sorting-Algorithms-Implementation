@@ -78,6 +78,7 @@ public class MyStringBuilder {
         System.arraycopy(charArray, 0, temp, 0, size); // to make length same as concatenating
         return String.valueOf(temp);
     }
+    //
 
     public void delete(int start, int end) { // end is exclusive cuz if one char then 0 1
         if (start > size || end < 0 || end == size + 1 || end > start) throw new IndexOutOfBoundsException();
